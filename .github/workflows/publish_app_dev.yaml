@@ -80,7 +80,7 @@ jobs:
         run: |
           cd simple_live_app
           flutter build apk --release --split-per-abi
-
+      
       #上传Artifacts
       - name: Upload APK to Artifacts
         uses: actions/upload-artifact@v4
@@ -110,11 +110,21 @@ jobs:
         run: |
           cd simple_live_tv_app
           flutter build apk --release --split-per-abi
+      #读取版本信息
+      - name: Read version
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: assets/tv_app_version.json
+      - name: Echo version
+        run: echo "${{ fromJson(steps.version.outputs.content).version }}"
+      - name: Echo version content
+        run: echo "${{ fromJson(steps.version.outputs.content).version_desc }}"
       #上传TV APK至Artifacts
       - name: Upload TV APK to Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: android_tv
+          name: "$simple_live_tv-{{ fromJson(steps.version.outputs.content).version }}-android_tv"
           path: |
             simple_live_tv_app/build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
             simple_live_tv_app/build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
@@ -149,12 +159,21 @@ jobs:
         run: |
           cd simple_live_app
           flutter_distributor package --platform macos --targets dmg,zip --skip-clean
-      
+      #读取版本信息
+      - name: Read version
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: assets/app_version.json
+      - name: Echo version
+        run: echo "${{ fromJson(steps.version.outputs.content).version }}"
+      - name: Echo version content
+        run: echo "${{ fromJson(steps.version.outputs.content).version_desc }}"
       # 上传MAC至Artifacts
       - name: Upload MacOS to Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: mac
+          name: "$simple_live-{{ fromJson(steps.version.outputs.content).version }}-mac"
           path: |
             simple_live_app/build/dist/*/*.dmg
             simple_live_app/build/dist/*/*.zip
@@ -198,11 +217,21 @@ jobs:
         run: |
           cd simple_live_app
           flutter_distributor package --platform linux --targets deb,zip --skip-clean
+      #读取版本信息
+      - name: Read version
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: assets/app_version.json
+      - name: Echo version
+        run: echo "${{ fromJson(steps.version.outputs.content).version }}"
+      - name: Echo version content
+        run: echo "${{ fromJson(steps.version.outputs.content).version_desc }}"
       # 上传Linux包至Artifacts
       - name: Upload Linux APP to Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: linux
+          name: "$simple_live-{{ fromJson(steps.version.outputs.content).version }}-Linux"
           path: |
             simple_live_app/build/dist/*/*.deb
             simple_live_app/build/dist/*/*.zip
@@ -240,11 +269,21 @@ jobs:
         run: |
           cd simple_live_app
           flutter_distributor package --platform windows --targets msix,zip --skip-clean
+      #读取版本信息
+      - name: Read version
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: assets/app_version.json
+      - name: Echo version
+        run: echo "${{ fromJson(steps.version.outputs.content).version }}"
+      - name: Echo version content
+        run: echo "${{ fromJson(steps.version.outputs.content).version_desc }}"
       # 上传Windows至Artifacts
       - name: Upload Windows APP to Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: windows
+          name: "$simple_live-{{ fromJson(steps.version.outputs.content).version }}-Windows"
           path: |
             simple_live_app/build/dist/*/*.msix
             simple_live_app/build/dist/*/*.zip
