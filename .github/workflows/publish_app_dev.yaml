@@ -6,9 +6,14 @@ on:
   #   branches:
   #     - 'dev'
     inputs:
+        branch:
+          description: '请输入目标分支名（如 dev 或 main）'
+          required: true
+          default: 'dev'
         tag:
           description: 'Release Tag (e.g., v1.0.0)'
           required: true
+          
 
 jobs:
   # 打包Android、iOS、Mac
