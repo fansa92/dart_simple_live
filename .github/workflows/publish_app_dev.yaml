@@ -2,9 +2,9 @@ name: app-build-action-dev
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - 'dev'
+  # push:
+  #   branches:
+  #     - 'dev'
 
 jobs:
   # 打包Android、iOS、Mac
