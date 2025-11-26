@@ -194,7 +194,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.22.x"
+          flutter-version: "3.38.x"
           cache: true
       # 安装依赖
       - name: Update apt-get
@@ -253,7 +253,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.22.x"
+          flutter-version: "3.38.x"
           cache: true
       - name: Enable Flutter Desktop
         run: flutter config --enable-windows-desktop
