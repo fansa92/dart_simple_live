@@ -6,6 +6,10 @@ on:
   #     - "v*"
   workflow_dispatch:
     inputs:
+        branch:
+          description: '请输入目标分支名（如 dev 或 master）'
+          required: true
+          default: 'master'
         tag:
           description: 'Release Tag (e.g., v1.0.0)'
           required: true
@@ -18,7 +22,7 @@ jobs:
       #签出代码 
       - uses: actions/checkout@v4
         with:
-          ref: master
+          ref: ${{ github.event.inputs.branch }}
 
       #APK签名设置
       - name: Download Android keystore
