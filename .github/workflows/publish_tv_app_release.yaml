@@ -89,10 +89,10 @@ jobs:
       - name: Upload Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.event.inputs.tag }}
-          name: "${{ fromJson(steps.version.outputs.content).version }}"
-          body: "# Android TV \n${{ fromJson(steps.version.outputs.content).version_desc }}"
-          prerelease: ${{ fromJson(steps.version.outputs.content).prerelease }}
+          tag_name: "TV_${{ github.event.inputs.tag }}"
+          name: "TV_${{ github.event.inputs.tag }}" # "${{ fromJson(steps.version.outputs.content).version }}"
+          # body: "# Android TV \n${{ fromJson(steps.version.outputs.content).version_desc }}"
+          prerelease: "TV_${{ github.event.inputs.tag }}" # ${{ fromJson(steps.version.outputs.content).prerelease }}
           # token: ${{ vars.TOKEN }}
           # overwrite: true
           files: |
